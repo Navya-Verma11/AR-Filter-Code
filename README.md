@@ -121,16 +121,10 @@ Feel free to fork this project and submit pull requests with enhancements! Ideas
 - Implement color scheme toggles for different cyberpunk vibes.
 - Optimize performance for low-end devices.
 
-## License
-
-This project is licensed under the [MIT License]. Feel free to use, modify, and distribute it.
-
 ## Acknowledgments
 
 - Built with p5.js and clmtrackr.
 - Inspired by cyberpunk aesthetics from sci-fi media.
 - Created for fun and learning on Glitch.
 
-## Contact
 
-Got questions or ideas? Reach out via your-email@example.com or open an issue on GitHub.
