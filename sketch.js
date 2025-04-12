@@ -16,7 +16,6 @@ function setup() {
   tracker.init();
   tracker.start(capture.elt);
 
-  // Initialize data stream particles
   for (let i = 0; i < 20; i++) {
     dataStream.push({
       x: random(width),
@@ -28,21 +27,17 @@ function setup() {
 }
 
 function draw() {
-  // Slight vignette effect
   background(0, 50);
   image(capture, 0, 0, width, height);
 
   positions = tracker.getCurrentPosition();
 
-  // Apply cyberpunk filter if face is detected
   if (positions.length > 0) {
     applyCyberpunkFilter();
   }
 
-  // Draw holographic data stream
   drawDataStream();
 
-  // Screen glitch effect
   if (frameCount % 15 < 3) {
     glitchOffset = random(-20, 20);
     tint(255, 0, 255, 150);
@@ -52,12 +47,10 @@ function draw() {
     noTint();
   }
 
-  // Neon grid overlay
   drawNeonGrid();
 }
 
 function applyCyberpunkFilter() {
-  // Neon face outline with dynamic glow
   stroke(0, 255, 204);
   strokeWeight(3 + sin(frameCount * 0.1) * 1);
   noFill();
@@ -65,29 +58,24 @@ function applyCyberpunkFilter() {
   for (let i = 0; i < 23; i++) {
     let x = positions[i][0];
     let y = positions[i][1];
-    vertex(x + random(-2, 2), y + random(-2, 2)); // Jitter for glitch vibe
+    vertex(x + random(-2, 2), y + random(-2, 2)); 
   }
   endShape(CLOSE);
 
-  // Eye scanners
   stroke(255, 0, 255);
   strokeWeight(2);
-  // Left eye
   line(
     positions[23][0] - 10,
     positions[23][1],
     positions[24][0] + 10,
     positions[24][1]
   );
-  // Right eye
   line(
     positions[25][0] - 10,
     positions[25][1],
     positions[26][0] + 10,
     positions[26][1]
   );
-
-  // Forehead HUD triangle
   fill(255, 0, 255, 50);
   stroke(255, 0, 255);
   let foreheadX = (positions[0][0] + positions[14][0]) / 2;
@@ -99,7 +87,6 @@ function applyCyberpunkFilter() {
   );
   noFill();
 
-  // Dynamic wireframe around mouth
   stroke(0, 255, 204);
   let mouthCenterX = (positions[44][0] + positions[50][0]) / 2;
   let mouthCenterY = (positions[44][1] + positions[50][1]) / 2;
@@ -115,7 +102,6 @@ function drawNeonGrid() {
   stroke(0, 255, 204, 100);
   strokeWeight(1);
   let gridSize = 40;
-  // Vertical lines
   for (let x = 0; x < width; x += gridSize) {
     line(x, 0, x, height);
   }
@@ -138,7 +124,6 @@ function drawDataStream() {
       particle.x = random(width);
       particle.text = random(['0', '1', '#', '$', '%']);
     }
-    // React to face position if detected
     if (positions.length > 0) {
       let faceCenterX = (positions[0][0] + positions[14][0]) / 2;
       let dist = abs(particle.x - faceCenterX);
